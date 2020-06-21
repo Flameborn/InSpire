@@ -19,29 +19,29 @@ If you care about your achievements, and why wouldn't you, be sure to grab [Achi
 
 Finally, grab an InSpire [release](https://github.com/flameborn/InSpire/releases), or compile from source (see below).
 
-The dll files should go into the *root* directory of the game, while the jar file should be located in a *mods* directory in the root. Feel free to create this directory if it does not exist.
+The downloaded *jar* file should be copied to a *mods* directory in the root. Feel free to create this directory if it does not exist.
 
 InSpire uses a screen reader for speech output. If a supported one is not available, the mod will fall back to Microsoft's Speech API.
 
 Communication between InSpire and an available speech driver is via Davy Kager's [Tolk](https://github.com/dkager/tolk) library.
 
+InSpire will attempt to extract Tolk and its helper libraries to the game's root directory when needed.
+
 ## Compiling from source
 
-The requirements are mostly the same, but in order to compile, you should get the [Java JDK](https://www.oracle.com/java/technologies/javase-jdk14-downloads.html) instead.
+The requirements are mostly the same, but in order to compile, you should get the [Java JDK](https://www.oracle.com/java/technologies/javase-jdk14-downloads.html) instead of the JRE.
 
 To build and package the mod, you will also need [Maven](https://maven.apache.org/download.cgi)
 
 Alternatively, you can use [Chocolatey](https://chocolatey.org/install).
 
-After cloning this repository:
-
-Open up a command line prompt and type:
+After cloning this repository, open up a command line prompt and type:
 
 ```
 mvn package
 ```
 
-If the build is successful, the jar file will be automagically copied to your *mods* directory. Additionally, you will need to copy the included dll files from *lib* to the root directory of the game.
+If the build is successful, the jar file will be automagically copied to your *mods* directory.
 
 *NOTE*: the default *pom.xml* file of this repository is set up to contain the default Steam and mod paths from the workshop. Please make sure that you don't include this in your pull requests, if you modify it to your taste.
 
