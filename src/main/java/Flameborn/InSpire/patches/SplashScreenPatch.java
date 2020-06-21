@@ -9,6 +9,9 @@ import Flameborn.InSpire.utils.autil;
 import java.util.ArrayList;
 import com.megacrit.cardcrawl.screens.splash.SplashScreen;
 import com.badlogic.gdx.Graphics;
+import com.megacrit.cardcrawl.helpers.input.InputHelper;
+import com.megacrit.cardcrawl.helpers.input.InputActionSet;
+
 
 public class SplashScreenPatch {
 
@@ -51,8 +54,21 @@ autil.speak("Mega Crit");
             Matcher matcher = new Matcher.MethodCallMatcher(Graphics.class, "getDeltaTime");
             return LineFinder.findInOrder(ctMethodToPatch, new ArrayList<Matcher>(), matcher);
         }
-
     }
+}
+
+    @SpirePatch(
+            clz= SplashScreen.class,
+            method="update"
+    )
+    public static class SplashScreenUpdatePostfixPatch{
+
+@SpirePostfixPatch
+        public static void postfix(SplashScreen _instance) {
+if (InputActionSet.confirm.isPressed()) {
+InputHelper.justClickedLeft=true;
+}
+}
 }
 
 }
