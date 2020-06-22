@@ -11,7 +11,7 @@ import com.megacrit.cardcrawl.screens.splash.SplashScreen;
 import com.badlogic.gdx.Graphics;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import com.megacrit.cardcrawl.helpers.input.InputActionSet;
-
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 
 public class SplashScreenPatch {
 
@@ -61,14 +61,35 @@ autil.speak("Mega Crit");
             clz= SplashScreen.class,
             method="update"
     )
-    public static class SplashScreenUpdatePostfixPatch{
+    public static class SplashScreenUpdatePrefixPatch{
 
-@SpirePostfixPatch
-        public static void postfix(SplashScreen _instance) {
+@SpirePrefixPatch
+        public static void prefix(SplashScreen _instance) {
 if (InputActionSet.confirm.isPressed()) {
 InputHelper.justClickedLeft=true;
 }
 }
+}
+
+    @SpirePatch(
+            clz= SplashScreen.class,
+            method="update"
+    )
+    public static class SplashScreenFadePatch2{
+
+    @SpireInsertPatch(
+            locator=Locator.class
+    )
+        public static void insert(SplashScreen _instance) {
+CardCrawlGame.sound.play("UI_CLICK_2");
+}
+
+    private static class Locator extends SpireInsertLocator {
+        public int[] Locate(CtBehavior ctMethodToPatch) throws CannotCompileException, PatchingException {
+            Matcher matcher = new Matcher.FieldAccessMatcher(SplashScreen.class, "timer");
+            return LineFinder.findInOrder(ctMethodToPatch, new ArrayList<Matcher>(), matcher);
+        }
+    }
 }
 
 }
