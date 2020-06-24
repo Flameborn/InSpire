@@ -1,21 +1,30 @@
 package Flameborn.InSpire.utils;
 
-import com.davykager.tolk.Tolk;
+import Flameborn.InSpire.Access.AContainer;
+import Flameborn.InSpire.utils.Speech;
+import java.util.HashMap;
 
-public class autil {
+public class AUtil {
+  private static HashMap<Screens, AContainer> containers = new HashMap<Screens, AContainer>();
+  public static Screens screen = Screens.none;
 
-public static boolean load() {
-Tolk.trySAPI(true);
-Tolk.preferSAPI(true);
-Tolk.load();
-if (!Tolk.isLoaded()) {
-return false;
-}
-return true;
-}
+  public static void newScreen(Screens type) {
+    newScreen(type, true);
+  }
 
-public static void speak(String text) {
-Tolk.output(text);
-}
+  public static void newScreen(Screens type, Boolean change) {
+    containers.put(screen, new AContainer());
+    if (change) {
+      screen = type;
+    }
+  }
 
+  public static AContainer curContainer() {
+    return containers.get(screen);
+  }
+
+  public enum Screens {
+    none,
+    mainMenu;
+  }
 }
