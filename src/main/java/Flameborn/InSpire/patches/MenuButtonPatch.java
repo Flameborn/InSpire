@@ -1,11 +1,8 @@
 package Flameborn.InSpire.patches;
 
-import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
-import com.evacipated.cardcrawl.modthespire.lib.*;
-import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
-import javassist.CannotCompileException;
-import javassist.CtBehavior;
 import Flameborn.InSpire.Access.*;
+import com.evacipated.cardcrawl.modthespire.lib.*;
+import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.screens.mainMenu.MenuButton;
 
 @SpirePatch(clz = MenuButton.class, method = SpirePatch.CONSTRUCTOR)

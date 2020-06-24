@@ -1,17 +1,17 @@
 package Flameborn.InSpire.patches;
 
-import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import Flameborn.InSpire.utils.Speech;
+import com.badlogic.gdx.Graphics;
 import com.evacipated.cardcrawl.modthespire.lib.*;
+import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.helpers.input.InputActionSet;
+import com.megacrit.cardcrawl.helpers.input.InputHelper;
+import com.megacrit.cardcrawl.screens.splash.SplashScreen;
+import java.util.ArrayList;
 import javassist.CannotCompileException;
 import javassist.CtBehavior;
-import Flameborn.InSpire.utils.Speech;
-import java.util.ArrayList;
-import com.megacrit.cardcrawl.screens.splash.SplashScreen;
-import com.badlogic.gdx.Graphics;
-import com.megacrit.cardcrawl.helpers.input.InputHelper;
-import com.megacrit.cardcrawl.helpers.input.InputActionSet;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
 
 public class SplashScreenPatch {
 

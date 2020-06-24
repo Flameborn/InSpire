@@ -1,9 +1,8 @@
 package Flameborn.InSpire.Access;
 
-import com.megacrit.cardcrawl.helpers.Hitbox;
-import Flameborn.InSpire.Access.AObject;
-import Flameborn.InSpire.utils.Speech;
 import Flameborn.InSpire.utils.Reflection;
+import Flameborn.InSpire.utils.Speech;
+import com.megacrit.cardcrawl.helpers.Hitbox;
 import java.util.ArrayList;
 
 public class AContainer {
@@ -12,7 +11,13 @@ public class AContainer {
 
   public void add(Object item, AObject.Types type) throws Exception {
     AObject obj = new AObject();
-    if (Reflection.hasField(item, "hb")) obj.hb = (Hitbox) item.getClass().getField("hb").get(this);
+    if (Reflection.hasField(item, "hb")) {
+      if (Reflection.isPrivate(item, "hb")) {
+        obj.hb = (Hitbox) Reflection.getPrivate(item, Hitbox.class, "hb");
+      } else {
+        obj.hb = (Hitbox) item.getClass().getField("hb").get(this);
+      }
+    }
     obj.type = type;
     obj.label = (String) Reflection.getPrivate(item, item.getClass(), "label");
     this.items.add(obj);
