@@ -9,17 +9,19 @@ public class AContainer {
   public int index = -1;
   private ArrayList<AObject> items = new ArrayList<AObject>();
 
-  public void add(Object item, AObject.Types type) throws Exception {
+  public void add(Object item, AObject.Types type) {
     AObject obj = new AObject();
     if (Reflection.hasField(item, "hb")) {
       if (Reflection.isPrivate(item, "hb")) {
         obj.hb = (Hitbox) Reflection.getPrivate(item, Hitbox.class, "hb");
       } else {
-        obj.hb = (Hitbox) item.getClass().getField("hb").get(this);
+        obj.hb = (Hitbox) Reflection.getField(item, "hb");
       }
     }
     obj.type = type;
-    obj.label = (String) Reflection.getPrivate(item, item.getClass(), "label");
+    if (Reflection.hasField(item, "label") && Reflection.isPrivate(item, "label")) {
+      obj.label = (String) Reflection.getPrivate(item, item.getClass(), "label");
+    }
     this.items.add(obj);
   }
 
@@ -29,8 +31,13 @@ public class AContainer {
 
   public void readCurItem() {
     AObject o = this.curItem();
-    o.hb.justHovered = true;
+    this.handleHitbox(o.hb);
     Speech.speak(o.label);
+  }
+
+  public void handleHitbox(Hitbox hb) {
+    if (hb == null) return;
+    hb.justHovered = true;
   }
 
   public void prevItem() {
@@ -41,7 +48,7 @@ public class AContainer {
 
   public void nextItem() {
     this.index++;
-    if (this.index > this.items.size() - 1) this.index = this.items.size() - 1;
+    if (this.index > items.size() - 1) this.index = this.items.size() - 1;
     this.readCurItem();
   }
 }
