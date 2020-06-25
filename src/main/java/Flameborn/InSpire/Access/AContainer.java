@@ -1,7 +1,9 @@
 package Flameborn.InSpire.Access;
 
+import Flameborn.InSpire.InSpire;
 import Flameborn.InSpire.utils.Reflection;
 import Flameborn.InSpire.utils.Speech;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.helpers.Hitbox;
 import java.util.ArrayList;
 
@@ -21,6 +23,7 @@ public class AContainer {
     obj.type = type;
     if (Reflection.hasField(item, "label") && Reflection.isPrivate(item, "label")) {
       obj.label = (String) Reflection.getPrivate(item, item.getClass(), "label");
+      InSpire.logger.info(obj.label);
     }
     this.items.add(obj);
   }
@@ -31,8 +34,7 @@ public class AContainer {
 
   public void readCurItem() {
     AObject o = this.curItem();
-    this.handleHitbox(o.hb);
-    Speech.speak(o.label);
+    Speech.speak(o.label, true);
   }
 
   public void handleHitbox(Hitbox hb) {
@@ -42,13 +44,27 @@ public class AContainer {
 
   public void prevItem() {
     this.index--;
-    if (this.index < 0) this.index = 0;
+    if (this.index < 0) {
+      this.index = 0;
+      return;
+    }
     this.readCurItem();
+    CardCrawlGame.sound.play("UI_HOVER", 0.75f);
   }
 
   public void nextItem() {
     this.index++;
-    if (this.index > items.size() - 1) this.index = this.items.size() - 1;
+    if (this.index > items.size() - 1) {
+      this.index = this.items.size() - 1;
+      return;
+    }
     this.readCurItem();
+    CardCrawlGame.sound.play("UI_HOVER");
+  }
+
+  public void activateItem() {
+    if (this.curItem().hb == null) return;
+    CardCrawlGame.sound.playA("UI_CLICK_1", -0.1f);
+    this.curItem().hb.clicked = true;
   }
 }

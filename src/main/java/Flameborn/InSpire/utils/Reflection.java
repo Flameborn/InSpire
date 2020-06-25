@@ -32,7 +32,7 @@ public class Reflection {
   }
 
   public static boolean hasField(Object object, String fieldName) {
-    return Arrays.stream(object.getClass().getFields())
+    return Arrays.stream(object.getClass().getDeclaredFields())
         .anyMatch(f -> f.getName().equals(fieldName));
   }
 

@@ -36,6 +36,10 @@ public class AUtil {
     if (InputActionSet.down.isJustPressed()) {
       curContainer().nextItem();
     }
+
+    if (InputActionSet.confirm.isJustPressed()) {
+      curContainer().activateItem();
+    }
   }
 
   public enum Screens {
