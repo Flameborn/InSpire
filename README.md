@@ -59,7 +59,10 @@ Contributions of any kind are more than welcome. Feel free to submit a new [issu
 
 Most definitely. Unfortunately, Mega Crit, despite multiple attempts from multiple people to reach out, including the author of this mod, remained consistently silent, even when offered to implement the a11y features.
 
-If you would like to help, feel free to contact them (nicely), and point them in the direction of this mod. Implementing accessibility in the game is the best way of ensuring that anyone can enjoy the game without barriers.
+If you would like to help, feel free to contact them (nicely), and point them in the direction of this mod. Implementing accessibility in the game is the best way of ensuring that anyone can enjoy the game without barriers, since:
+
+* Accessibility features that this mod provides would be available out of the box, without having to install additional mods.
+* Game updates would not break accessibility. STS updates are known to be released quite often. Even though the authors of this mod did everything possible to minimise chances, but changes to the core game could potentially render parts of, or the complete InSpire (or the required mod packages) unusable until a new, fixed version is posted.
 
 ### Why Windows only?
 
@@ -76,3 +79,11 @@ Linux at the moment is not my operating system of choice for daily use, hence th
 * [@daviscook477](https://github.com/daviscook477), the current maintainer of [Basemod](https://github.com/daviscook477/BaseMod)
 * [@kiooeht](https://github.com/kiooeht) for [ModTheSpire](https://github.com/kiooeht/ModTheSpire)
 * And thanks to any past, present or future modders. I am glad to be part of such a vibrant community.
+
+## STS supports the Steam Workshop. Are there plans to publish InSpire there?
+
+Absolutely. Once InSpire reaches a stable version, it will be published there as well. Binary releases will be still available here, in case you are using a non-Steam version.
+
+## How can I keep up with updates?
+
+Simply subscribe to releases via the *watch* feature.
