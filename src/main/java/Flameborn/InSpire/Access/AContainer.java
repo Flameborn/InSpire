@@ -3,8 +3,10 @@ package Flameborn.InSpire.Access;
 import Flameborn.InSpire.InSpire;
 import Flameborn.InSpire.utils.Reflection;
 import Flameborn.InSpire.utils.Speech;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.badlogic.gdx.Gdx;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.Hitbox;
+import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import java.util.ArrayList;
 
 public class AContainer {
@@ -39,7 +41,8 @@ public class AContainer {
 
   public void handleHitbox(Hitbox hb) {
     if (hb == null) return;
-    hb.justHovered = true;
+
+    Gdx.input.setCursorPosition((int) hb.cX, Settings.HEIGHT - (int) hb.cY);
   }
 
   public void prevItem() {
@@ -48,8 +51,8 @@ public class AContainer {
       this.index = 0;
       return;
     }
+    this.handleHitbox(this.curItem().hb);
     this.readCurItem();
-    CardCrawlGame.sound.play("UI_HOVER", 0.75f);
   }
 
   public void nextItem() {
@@ -58,13 +61,13 @@ public class AContainer {
       this.index = this.items.size() - 1;
       return;
     }
+    this.handleHitbox(this.curItem().hb);
     this.readCurItem();
-    CardCrawlGame.sound.play("UI_HOVER");
   }
 
   public void activateItem() {
     if (this.curItem().hb == null) return;
-    CardCrawlGame.sound.playA("UI_CLICK_1", -0.1f);
+    InputHelper.justClickedLeft = true;
     this.curItem().hb.clicked = true;
   }
 }
