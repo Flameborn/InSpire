@@ -1,5 +1,6 @@
 package Flameborn.InSpire.utils;
 
+import Flameborn.InSpire.Access.AActions;
 import Flameborn.InSpire.Access.AContainer;
 import Flameborn.InSpire.Access.AObject;
 import com.megacrit.cardcrawl.helpers.input.InputActionSet;
@@ -39,6 +40,14 @@ public class AUtil {
 
     if (InputActionSet.confirm.isJustPressed()) {
       curContainer().activateItem();
+    }
+
+    if (AActions.home.isJustPressed()) {
+      curContainer().firstItem();
+    }
+
+    if (AActions.end.isJustPressed()) {
+      curContainer().lastItem();
     }
   }
 

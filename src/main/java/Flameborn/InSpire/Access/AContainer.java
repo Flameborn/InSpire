@@ -70,4 +70,18 @@ public class AContainer {
     InputHelper.justClickedLeft = true;
     this.curItem().hb.clicked = true;
   }
+
+  public AObject firstItem() {
+    this.index = 0;
+    this.handleHitbox(this.curItem().hb);
+    this.readCurItem();
+    return this.curItem();
+  }
+
+  public AObject lastItem() {
+    this.index = this.items.size() - 1;
+    this.handleHitbox(this.curItem().hb);
+    this.readCurItem();
+    return this.curItem();
+  }
 }
