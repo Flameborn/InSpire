@@ -17,7 +17,9 @@ public class MainMenuScreenPatch {
 
     @SpirePostfixPatch()
     public static void postfix(MainMenuScreen _instance) {
+      AUtil.reverseItems();
       Speech.speak(CardCrawlGame.languagePack.getUIString("RichPresence").TEXT[3]);
+      AUtil.curContainer().firstItem(false);
     }
 
     @SpirePrefixPatch()

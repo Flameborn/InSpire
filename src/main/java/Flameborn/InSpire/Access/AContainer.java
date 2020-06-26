@@ -8,6 +8,7 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class AContainer {
   public int index = -1;
@@ -35,8 +36,12 @@ public class AContainer {
   }
 
   public void readCurItem() {
+    this.readCurItem(true);
+  }
+
+  public void readCurItem(boolean interrupt) {
     AObject o = this.curItem();
-    Speech.speak(o.label, true);
+    Speech.speak(o.label, interrupt);
   }
 
   public void handleHitbox(Hitbox hb) {
@@ -72,16 +77,41 @@ public class AContainer {
   }
 
   public AObject firstItem() {
+    return this.firstItem(true);
+  }
+
+  public AObject firstItem(boolean interrupt) {
     this.index = 0;
     this.handleHitbox(this.curItem().hb);
-    this.readCurItem();
+    this.readCurItem(interrupt);
     return this.curItem();
   }
 
   public AObject lastItem() {
+    return this.lastItem(true);
+  }
+
+  public AObject lastItem(boolean interrupt) {
     this.index = this.items.size() - 1;
     this.handleHitbox(this.curItem().hb);
-    this.readCurItem();
+    this.readCurItem(interrupt);
     return this.curItem();
+  }
+
+  public AObject focusItem(int item) {
+    return this.focusItem(item, true);
+  }
+
+  public AObject focusItem(int item, boolean interrupt) {
+    if ((item > this.items.size() - 1) | (item < 0)) return this.curItem();
+
+    this.index = item;
+    this.handleHitbox(this.curItem().hb);
+    this.readCurItem(interrupt);
+    return this.curItem();
+  }
+
+  public void reverseitems() {
+    Collections.reverse(items);
   }
 }

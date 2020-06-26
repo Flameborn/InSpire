@@ -51,6 +51,10 @@ public class AUtil {
     }
   }
 
+  public static void reverseItems() {
+    curContainer().reverseitems();
+  }
+
   public enum Screens {
     none,
     mainMenu;
