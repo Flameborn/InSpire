@@ -51,6 +51,10 @@ public class AUtil {
     }
   }
 
+  public static void addAObject(AObject obj) {
+    curContainer().addAObject(obj);
+  }
+
   public static void reverseItems() {
     curContainer().reverseitems();
   }

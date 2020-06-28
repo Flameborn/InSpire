@@ -1,6 +1,5 @@
 package Flameborn.InSpire.Access;
 
-import Flameborn.InSpire.InSpire;
 import Flameborn.InSpire.utils.Reflection;
 import Flameborn.InSpire.utils.Speech;
 import com.badlogic.gdx.Gdx;
@@ -26,8 +25,11 @@ public class AContainer {
     obj.type = type;
     if (Reflection.hasField(item, "label") && Reflection.isPrivate(item, "label")) {
       obj.label = (String) Reflection.getPrivate(item, item.getClass(), "label");
-      InSpire.logger.info(obj.label);
     }
+    this.items.add(obj);
+  }
+
+  public void addAObject(AObject obj) {
     this.items.add(obj);
   }
 
