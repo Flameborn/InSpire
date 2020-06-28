@@ -43,7 +43,12 @@ public class AContainer {
 
   public void readCurItem(boolean interrupt) {
     AObject o = this.curItem();
-    Speech.speak(o.label, interrupt);
+    if (!o.label.endsWith(".")) o.label += ".";
+    if (o.hint != null) {
+      Speech.speak(o.label + " " + o.hint, interrupt);
+    } else {
+      Speech.speak(o.label, interrupt);
+    }
   }
 
   public void handleHitbox(Hitbox hb) {
