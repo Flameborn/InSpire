@@ -45,11 +45,22 @@ If the build is successful, the jar file will be automagically copied to your *m
 
 *NOTE*: the default *pom.xml* file of this repository is set up to contain the default Steam and mod paths from the workshop. Please make sure that you don't include this in your pull requests, if you modify it to your taste.
 
+## Keyboard shortcuts
+
+Please note: InSpire provides a set of shortcuts to enhance game accessibility. These shortcuts are currently not remappable. Assigning existing STS actions to InSpire keys may result in unwanted behaviour.
+
+* *Enter*: By default, it activates the selected item. Alternatively, it performs the selected action for the current item, or the default action for the current screen. It also allows certain screens to be skipped, such as the splash screen.
+* *Shift+Enter*: Cycles between available actions.
+* *Home*: Moves to the first item on the current screen.
+* *End*: Moves to the last item on the current screen.
+* *Up/Down arrows*: Moves to the previous and next item on the current screen. respectively.
+* *Left/Right arrows*: Moves between the various items of a selected item, e.g. moves between list items of a list, or adjusts sliders.
+
 ## Contributing
 
 Contributions of any kind are more than welcome. Feel free to submit a new [issue](https://github.com/flameborn/InSpire/issues/new), or a [pull request](https://github.com/flameborn/InSpire/pull/new). Thanks in advance for making STS access better!
 
-## InSpire Contributors
+### InSpire Contributors
 
 * [Flameborn](https://github.com/flameborn)
 

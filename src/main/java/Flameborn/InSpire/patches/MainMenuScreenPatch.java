@@ -25,7 +25,9 @@ public class MainMenuScreenPatch {
         obj.label = CardCrawlGame.playerName;
         obj.type = AObject.Types.menuButton;
         obj.hint = _instance.TEXT[3];
-        obj.hb = (Hitbox) Reflection.getPrivate(_instance, MainMenuScreen.class, "nameEditHb");
+        obj.addAction(
+            "Activate",
+            (Hitbox) Reflection.getPrivate(_instance, MainMenuScreen.class, "nameEditHb"));
         AUtil.addAObject(obj);
       }
       AUtil.reverseItems();

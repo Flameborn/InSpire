@@ -11,15 +11,15 @@ import java.util.Collections;
 
 public class AContainer {
   public int index = -1;
-  private ArrayList<AObject> items = new ArrayList<AObject>();
+  private ArrayList<AObject> items = new ArrayList<>();
 
   public void add(Object item, AObject.Types type) {
     AObject obj = new AObject();
     if (Reflection.hasField(item, "hb")) {
       if (Reflection.isPrivate(item, "hb")) {
-        obj.hb = (Hitbox) Reflection.getPrivate(item, Hitbox.class, "hb");
+        obj.addAction("Activate", (Hitbox) Reflection.getPrivate(item, Hitbox.class, "hb"));
       } else {
-        obj.hb = (Hitbox) Reflection.getField(item, "hb");
+        obj.addAction("Activate", (Hitbox) Reflection.getField(item, "hb"));
       }
     }
     obj.type = type;
@@ -63,7 +63,7 @@ public class AContainer {
       this.index = 0;
       return;
     }
-    this.handleHitbox(this.curItem().hb);
+    this.handleHitbox(this.curItem().curAction().hb);
     this.readCurItem();
   }
 
@@ -73,14 +73,14 @@ public class AContainer {
       this.index = this.items.size() - 1;
       return;
     }
-    this.handleHitbox(this.curItem().hb);
+    this.handleHitbox(this.curItem().curAction().hb);
     this.readCurItem();
   }
 
   public void activateItem() {
-    if (this.curItem().hb == null) return;
+    if (this.curItem().curAction().hb == null) return;
     InputHelper.justClickedLeft = true;
-    this.curItem().hb.clicked = true;
+    this.curItem().curAction().hb.clicked = true;
   }
 
   public AObject firstItem() {
@@ -89,7 +89,7 @@ public class AContainer {
 
   public AObject firstItem(boolean interrupt) {
     this.index = 0;
-    this.handleHitbox(this.curItem().hb);
+    this.handleHitbox(this.curItem().curAction().hb);
     this.readCurItem(interrupt);
     return this.curItem();
   }
@@ -100,7 +100,7 @@ public class AContainer {
 
   public AObject lastItem(boolean interrupt) {
     this.index = this.items.size() - 1;
-    this.handleHitbox(this.curItem().hb);
+    this.handleHitbox(this.curItem().curAction().hb);
     this.readCurItem(interrupt);
     return this.curItem();
   }
@@ -113,7 +113,7 @@ public class AContainer {
     if ((item > this.items.size() - 1) | (item < 0)) return this.curItem();
 
     this.index = item;
-    this.handleHitbox(this.curItem().hb);
+    this.handleHitbox(this.curItem().curAction().hb);
     this.readCurItem(interrupt);
     return this.curItem();
   }

@@ -38,7 +38,7 @@ public class AUtil {
       curContainer().nextItem();
     }
 
-    if (InputActionSet.confirm.isJustPressed()) {
+    if (!AInput.isShiftPressed() && InputActionSet.confirm.isJustPressed()) {
       curContainer().activateItem();
     }
 
@@ -48,6 +48,10 @@ public class AUtil {
 
     if (AInput.end.isJustPressed()) {
       curContainer().lastItem();
+    }
+
+    if (AInput.isSwitchActionJustPressed()) {
+      curContainer().curItem().nextAction();
     }
   }
 
