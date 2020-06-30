@@ -43,12 +43,36 @@ public class AContainer {
   }
 
   public void readCurItem(boolean interrupt) {
+    StringBuilder sb = new StringBuilder();
     AObject o = this.curItem();
-    if (!o.label.endsWith(".")) o.label += ".";
+
+    sb.append(o.label);
+
+    if (!o.label.endsWith(".")) sb.append(".");
+
+    sb.append(" ");
+    sb.append(getAObjectTypeString(o.type));
+    sb.append(". ");
     if (o.hint != null) {
-      Speech.speak(o.label + " " + o.hint, interrupt);
-    } else {
-      Speech.speak(o.label, interrupt);
+      sb.append(o.hint);
+    }
+    Speech.speak(sb.toString(), interrupt);
+  }
+
+  public String getAObjectTypeString(AObject.Types type) {
+    switch (type) {
+      case button:
+        {
+          return "Button";
+        }
+      case slider:
+        {
+          return "Slider";
+        }
+      default:
+        {
+          return "";
+        }
     }
   }
 
