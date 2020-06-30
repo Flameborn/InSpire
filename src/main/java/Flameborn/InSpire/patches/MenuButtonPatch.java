@@ -1,6 +1,5 @@
 package Flameborn.InSpire.patches;
 
-import Flameborn.InSpire.Access.AObject;
 import Flameborn.InSpire.utils.AUtil;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
@@ -11,6 +10,6 @@ public class MenuButtonPatch {
 
   @SpirePostfixPatch()
   public static void postfix(MenuButton _instance) {
-    AUtil.addToCurContainer(_instance, AObject.Types.menuButton);
+    AUtil.curContainer().addButton(_instance);
   }
 }

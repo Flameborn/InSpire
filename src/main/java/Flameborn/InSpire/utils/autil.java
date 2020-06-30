@@ -2,7 +2,6 @@ package Flameborn.InSpire.utils;
 
 import Flameborn.InSpire.Access.AContainer;
 import Flameborn.InSpire.Access.AInput;
-import Flameborn.InSpire.Access.AObject;
 import com.megacrit.cardcrawl.helpers.input.InputActionSet;
 import java.util.HashMap;
 
@@ -23,10 +22,6 @@ public class AUtil {
 
   public static AContainer curContainer() {
     return containers.get(screen);
-  }
-
-  public static void addToCurContainer(Object obj, AObject.Types type) {
-    curContainer().add(obj, type);
   }
 
   public static void checkKeys() {
@@ -53,10 +48,6 @@ public class AUtil {
     if (AInput.isSwitchActionJustPressed()) {
       curContainer().curItem().nextAction();
     }
-  }
-
-  public static void addAObject(AObject obj) {
-    curContainer().addAObject(obj);
   }
 
   public static void reverseItems() {

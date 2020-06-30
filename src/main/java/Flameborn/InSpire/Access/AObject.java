@@ -40,7 +40,6 @@ public class AObject {
   }
 
   public enum Types {
-    menuButton,
     button,
     list,
     edit,

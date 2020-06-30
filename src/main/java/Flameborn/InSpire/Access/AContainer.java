@@ -3,9 +3,11 @@ package Flameborn.InSpire.Access;
 import Flameborn.InSpire.utils.Reflection;
 import Flameborn.InSpire.utils.Speech;
 import com.badlogic.gdx.Gdx;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
+import com.megacrit.cardcrawl.screens.mainMenu.MainMenuScreen;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -13,24 +15,23 @@ public class AContainer {
   public int index = -1;
   private ArrayList<AObject> items = new ArrayList<>();
 
-  public void add(Object item, AObject.Types type) {
+  public void addButton(Object item) {
     AObject obj = new AObject();
-    if (Reflection.hasField(item, "hb")) {
-      if (Reflection.isPrivate(item, "hb")) {
-        obj.addAction("Activate", (Hitbox) Reflection.getPrivate(item, Hitbox.class, "hb"));
-      } else {
-        obj.addAction("Activate", (Hitbox) Reflection.getField(item, "hb"));
-      }
-    }
-    obj.type = type;
-    if (Reflection.hasField(item, "label") && Reflection.isPrivate(item, "label")) {
-      obj.label = (String) Reflection.getPrivate(item, item.getClass(), "label");
-    }
+    obj.addAction("Activate", (Hitbox) Reflection.getField(item, "hb"));
+    obj.type = AObject.Types.button;
+    obj.label = (String) Reflection.getPrivate(item, item.getClass(), "label");
     this.items.add(obj);
   }
 
-  public void addAObject(AObject obj) {
-    this.items.add(obj);
+  public void addSaveSlotsButton(Object obj) {
+    AObject aobj = new AObject();
+    aobj.label = CardCrawlGame.playerName;
+    aobj.type = AObject.Types.button;
+    String[] text = (String[]) Reflection.getField(obj, "TEXT");
+    aobj.hint = text[3];
+    aobj.addAction(
+        "Activate", (Hitbox) Reflection.getPrivate(obj, MainMenuScreen.class, "nameEditHb"));
+    this.items.add(aobj);
   }
 
   public AObject curItem() {
