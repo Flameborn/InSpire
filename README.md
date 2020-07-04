@@ -1,6 +1,6 @@
 # InSpire
 
-A mod for Slay the Spire that provides access to the game for blind and visually impaired gamers under Windows.
+A mod for Slay the Spire that provides access to the game for blind and visually impaired gamers under Windows and MacOS.
 
 ## Installation
 
@@ -8,7 +8,7 @@ The installation steps are currently for Steam. Other versions from non-Steam di
 
 You will need the following requirements:
 
-* [Steam for Windows](https://steamcdn-a.akamaihd.net/client/installer/SteamSetup.exe)
+* Steam for [Windows](https://steamcdn-a.akamaihd.net/client/installer/SteamSetup.exe) or [MacOS](https://steamcdn-a.akamaihd.net/client/installer/steam.dmg)
 * [Slay the Spire](https://store.steampowered.com/app/646570/Slay_the_Spire/)
 * [Java JRE](https://www.oracle.com/java/technologies/javase-jre8-downloads.html)
 * [BaseMod](https://steamcommunity.com/workshop/filedetails/?id=1605833019)
@@ -19,13 +19,23 @@ If you care about your achievements, and why wouldn't you, be sure to grab [Achi
 
 Finally, grab an InSpire [release](https://github.com/flameborn/InSpire/releases), or compile from source (see below).
 
-The downloaded *jar* file should be copied to a *mods* directory in the root. Feel free to create this directory if it does not exist.
+The downloaded *jar* file should be copied to a *mods* directory in the root of the game.
 
-InSpire uses a screen reader for speech output. If a supported one is not available, the mod will fall back to Microsoft's Speech API.
+Under Windows, this is: *C:/Program Files (x86)/Steam/steamapps/common/SlayTheSpire*
+
+Under MacOS, it's: *~/Library/Application Support/Steam/steamapps/common/SlayTheSpire/SlayTheSpire.app/Contents/Resources
+
+(Note: You need to choose *Show Package Contents* from the context menu to access the contents of *SlayTheSpire.app*)
+
+Feel free to create the *mods* directory if it does not exist.
+
+Under Windows, InSpire uses a screen reader for speech output. If a supported one is not available, the mod will fall back to Microsoft's Speech API.
 
 Communication between InSpire and an available speech driver is via Davy Kager's [Tolk](https://github.com/dkager/tolk) library.
 
 InSpire will attempt to extract Tolk and its helper libraries to the game's root directory when needed.
+
+Under MacOS, InSpire will attempt to use the built-in *say* utility.
 
 ## Compiling from source
 
@@ -33,7 +43,7 @@ The requirements are mostly the same, but in order to compile, you should get th
 
 To build and package the mod, you will also need [Maven](https://maven.apache.org/download.cgi)
 
-Alternatively, you can use [Chocolatey](https://chocolatey.org/install).
+Alternatively, you can use [Chocolatey](https://chocolatey.org/install) under Windows, or [Homebrew](https://brew.sh/) under MacOS to install these packages faster.
 
 After cloning this repository, open up a command line prompt and type:
 
@@ -43,7 +53,7 @@ mvn package
 
 If the build is successful, the jar file will be automagically copied to your *mods* directory.
 
-*NOTE*: the default *pom.xml* file of this repository is set up to contain the default Steam and mod paths from the workshop. Please make sure that you don't include this in your pull requests, if you modify it to your taste.
+*NOTE*: the default *pom.xml* file of this repository is set up to contain the default Steam and mod paths from the workshop. Feel free to modify it, should your paths differ, however, please make sure that you *do not* include this in your pull requests.
 
 ## Keyboard shortcuts
 
@@ -68,18 +78,28 @@ Contributions of any kind are more than welcome. Feel free to submit a new [issu
 
 ### This is nice and all, but wouldn't this be better in the actual game?
 
-Most definitely. Unfortunately, Mega Crit, despite multiple attempts from multiple people to reach out, including the author of this mod, remained consistently silent, even when offered to implement the a11y features.
+Most definitely. Unfortunately, Mega Crit believes that adding accessibility features on top of the game is better to do in a mod.
 
-If you would like to help, feel free to contact them (nicely), and point them in the direction of this mod. Implementing accessibility in the game is the best way of ensuring that anyone can enjoy the game without barriers, since:
+I believe that implementing accessibility in the game is the best way of ensuring that anyone can enjoy the game without barriers, since:
 
-* Accessibility features that this mod provides would be available out of the box, without having to install additional mods.
+* Accessibility features that this mod provides would be available out of the box, without having to install, or rely on, additional mods. In addition, accessibility features would be likely available on platforms where modding is currently not possible, such as on iOS.
 * Game updates would not break accessibility. STS updates are known to be released quite often. Even though the authors of this mod did everything possible to minimise chances, but changes to the core game could potentially render parts of, or the complete InSpire (or the required mod packages) unusable until a new, fixed version is posted.
 
-### Why Windows only?
-
-Due to Apple's app notarization requirements, the upcoming 2.1 version of STS will not support mods. This means that I won't be able to support MacOS.
+### Why Windows and Mac only?
 
 Linux at the moment is not my operating system of choice for daily use, hence the mod does not support it. Having said that, it should be possible to make things work via Speech Dispatcher. Contributions to support this are welcome.
+
+### Why are you using the 'say' utility? Isn't that a bit inefficient when NSSpeechSynthesizer is available?
+
+Yes, and no. Java currently cannot use objective C classes directly. Although bridges exist, they rely on an external dynamic library (dylib), which would need signing and notarization in order to run.
+
+Since Apple's developer license is not free, and it is an annual price, covering this cost would require continuous funding. Asking Mac users of InSpire for continuous payment while access is theoretically provided for free on other platforms would be unfair. Using *say* is currently the best option.
+
+### How is InSpire different when compared to TextTheSpire?
+
+It is important to note that InSpire was not born to replace TextTheSpire.
+
+InSpire is meant to provide an alternative, perhaps a bit more mainstream, way to access the game, which does not rely on text commands. If you don't like this, or you would like to play Slay the Spire in the style of a text game instead, TextTheSpire is for you!
 
 ## Special Thanks
 
